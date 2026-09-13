@@ -51,6 +51,8 @@ nav.side .credit .stores>span{grid-row:span 2}
 nav.side .credit a{display:inline;padding:0;border:0;font-size:inherit;color:var(--link)}
 nav.side .credit a:hover{background:none;text-decoration:underline}
 nav.side .credit .fine{margin-bottom:0;opacity:.8}
+nav.side .unofficial{margin:0 18px 4px;font-family:ui-monospace,Menlo,monospace;
+  font-size:11px;letter-spacing:.04em;color:var(--accent2)}
 nav.side a.on{border-left-color:var(--accent);background:#1a2029;color:var(--accent)}
 
 main{padding:26px 34px 90px;min-width:0}
@@ -269,7 +271,8 @@ function sortable(){
 
 const navEl = document.getElementById("nav");
 function buildNav(){
-  navEl.innerHTML = "";
+  // Said first, before any article: what this is and whose game it is about.
+  navEl.innerHTML = '<p class="unofficial">Unofficial fan wiki</p>';
 
   for (const [group, items] of NAV){
     const h = document.createElement("h3"); h.textContent = group; navEl.append(h);
