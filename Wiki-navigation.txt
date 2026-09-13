@@ -19,6 +19,7 @@
 **Your space station|Your space station
 **Factions|Factions
 **Achievements|Achievements
-**Side quests|Side quests
-*Spoilers
+*Extras
 **Spoilers|Spoilers
+**Side quests|Side quests
+**Modding|Modding
