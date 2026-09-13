@@ -34,10 +34,7 @@ a.new{color:#e06c6c}
 
 .shell{display:grid;grid-template-columns:230px minmax(0,1fr);gap:0;
   max-width:1500px;margin:0 auto}
-/* The sidebar holds still while an article scrolls, so the search is always in
-   reach. */
-nav.side{border-right:1px solid var(--edge);padding:18px 0 40px;position:sticky;top:0;
-  height:100vh;overflow-y:auto;overflow-x:hidden}
+nav.side{border-right:1px solid var(--edge);padding:18px 0 40px;min-height:100vh}
 nav.side h3{margin:18px 18px 6px;font-family:var(--ui);font-size:11px;letter-spacing:.12em;
   text-transform:uppercase;color:var(--dim);font-weight:600}
 nav.side #navList a{display:block;padding:6px 18px;color:var(--ink);font-size:14px;
