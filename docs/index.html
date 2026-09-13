@@ -18,30 +18,31 @@ a{color:var(--link);text-decoration:none}
 a:hover{text-decoration:underline}
 a.new{color:#e06c6c}
 
-.topbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:16px;
-  height:52px;padding:0 18px;background:var(--rail);border-bottom:1px solid var(--edge)}
-.topbar .logo{color:var(--head);text-decoration:none;font-family:var(--ui);font-weight:700;letter-spacing:.02em;
-  color:var(--head);font-size:16px;white-space:nowrap}
-.topbar .logo span{color:var(--accent)}
-.topbar input{margin-left:auto;width:min(320px,40vw);padding:7px 11px;border-radius:16px;
-  border:1px solid var(--edge);background:#0d1116;color:var(--ink);font:inherit;font-size:13px}
-.topbar input:focus{outline:none;border-color:var(--accent)}
-/* The link across to the map, drawn exactly as the map draws its link here. */
-.mapLink{flex:none;font-family:ui-monospace,Menlo,monospace;font-size:12px;
-  letter-spacing:.04em;color:var(--accent);border:1px solid var(--accent);
-  border-radius:2px;padding:2px 8px;white-space:nowrap}
+.brandBox{padding:0 18px 6px;display:flex;flex-direction:column;gap:8px}
+.brandRow{display:flex;align-items:center;gap:10px}
+.mapLink{flex:none;margin-left:auto;color:var(--accent);border:1px solid var(--accent);
+  border-radius:3px;padding:3px 9px;font-family:var(--ui);font-size:13px;text-decoration:none}
 .mapLink::after{content:" \2197"}
-.mapLink:hover,.mapLink:focus-visible{text-decoration:none;color:var(--head);
-  border-color:var(--head);outline:none}
+.mapLink:hover{text-decoration:none;background:rgba(88,166,255,.12)}
+.logo{color:var(--head);text-decoration:none;font-family:var(--ui);font-weight:700;
+  letter-spacing:.02em;font-size:15px;white-space:nowrap}
+.logo span{color:var(--accent)}
+.logo:hover{text-decoration:none}
+.brandBox input{width:100%;padding:7px 11px;border-radius:16px;border:1px solid var(--edge);
+  background:#0d1116;color:var(--ink);font:inherit;font-size:13px}
+.brandBox input:focus{outline:none;border-color:var(--accent)}
 
 .shell{display:grid;grid-template-columns:230px minmax(0,1fr);gap:0;
   max-width:1500px;margin:0 auto}
-nav.side{border-right:1px solid var(--edge);padding:18px 0 60px;min-height:calc(100vh - 52px)}
+/* The sidebar holds still while an article scrolls, so the search is always in
+   reach. */
+nav.side{border-right:1px solid var(--edge);padding:18px 0 40px;position:sticky;top:0;
+  height:100vh;overflow-y:auto;overflow-x:hidden}
 nav.side h3{margin:18px 18px 6px;font-family:var(--ui);font-size:11px;letter-spacing:.12em;
   text-transform:uppercase;color:var(--dim);font-weight:600}
-nav.side a{display:block;padding:6px 18px;color:var(--ink);font-size:14px;
+nav.side #navList a{display:block;padding:6px 18px;color:var(--ink);font-size:14px;
   border-left:3px solid transparent}
-nav.side a:hover{background:#1a2029;text-decoration:none}
+nav.side #navList a:hover{background:#1a2029;text-decoration:none}
 nav.side .credit{margin:24px 18px 0;padding-top:12px;border-top:1px solid var(--edge);
   font-family:ui-monospace,Menlo,monospace;font-size:11px;line-height:1.6;color:var(--dim)}
 nav.side .credit p{margin:0 0 6px}
@@ -51,9 +52,9 @@ nav.side .credit .stores>span{grid-row:span 2}
 nav.side .credit a{display:inline;padding:0;border:0;font-size:inherit;color:var(--link)}
 nav.side .credit a:hover{background:none;text-decoration:underline}
 nav.side .credit .fine{margin-bottom:0;opacity:.8}
-nav.side .unofficial{margin:0 18px 4px;font-family:ui-monospace,Menlo,monospace;
+nav.side .unofficial{margin:0;white-space:nowrap;font-family:ui-monospace,Menlo,monospace;
   font-size:11px;letter-spacing:.04em;color:var(--accent2)}
-nav.side a.on{border-left-color:var(--accent);background:#1a2029;color:var(--accent)}
+nav.side #navList a.on{border-left-color:var(--accent);background:#1a2029;color:var(--accent)}
 
 main{padding:26px 34px 90px;min-width:0}
 .hero{border-bottom:1px solid var(--edge);padding-bottom:10px;margin-bottom:20px;
@@ -100,8 +101,9 @@ body.srcmode article{display:none}
 
 footer.wf{border-top:1px solid var(--edge);margin-top:40px;padding-top:14px;
   color:var(--dim);font-size:12px}
-.burger{display:none;width:34px;height:30px;flex:none;place-items:center;padding:0;
-  background:transparent;border:1px solid var(--edge);border-radius:3px;cursor:pointer}
+.burger{display:none;position:fixed;top:12px;left:12px;z-index:10;width:36px;height:32px;
+  place-items:center;padding:0;background:var(--rail);border:1px solid var(--edge);
+  border-radius:3px;cursor:pointer}
 .burger span,.burger span::before,.burger span::after{display:block;width:16px;height:2px;
   background:var(--dim);position:relative;content:""}
 .burger span::before{position:absolute;top:-5px}
@@ -115,29 +117,34 @@ body.navopen .burger span::after{background:var(--accent)}
 @media (max-width:820px){
   .shell{grid-template-columns:1fr}
   .burger{display:grid}
-  nav.side{position:fixed;top:52px;left:0;bottom:0;z-index:9;width:min(280px,85vw);
+  nav.side{position:fixed;top:0;left:0;bottom:0;height:auto;z-index:9;width:min(300px,85vw);
     min-height:0;overflow-y:auto;background:var(--rail);border-right:1px solid var(--edge);
     box-shadow:12px 0 30px rgba(0,0,0,.45);transform:translateX(-100%);
     visibility:hidden;transition:transform .18s ease-in,visibility 0s .18s}
   body.navopen nav.side{transform:none;visibility:visible;transition:transform .18s ease-out}
   main{padding:20px 16px 70px}
-  .topbar input{width:auto;flex:1;min-width:90px}
-  .topbar{gap:10px;padding:0 12px}
+  main{padding-top:60px}
+  nav.side{padding-top:60px}
 
 }
 @media (prefers-reduced-motion:reduce){nav.side{transition:none}}
 </style></head><body>
 
-<div class="topbar">
-  <button class="burger" id="burger" type="button" aria-label="Articles"
-          aria-controls="nav" aria-expanded="false"><span></span></button>
-  <a class="logo" href="#Galaxy_Genome_Wiki">GALAXY GENOME <span>WIKI</span></a>
-  <a class="mapLink" id="mapLink" href="https://galaxy-genome.github.io/map/" target="_blank" rel="noopener">Map</a>
-<input id="q" type="search" placeholder="Search articles" autocomplete="off">
-</div>
+<button class="burger" id="burger" type="button" aria-label="Articles"
+        aria-controls="nav" aria-expanded="false"><span></span></button>
 
 <div class="shell">
-  <nav class="side" id="nav"></nav>
+  <nav class="side" id="nav">
+    <div class="brandBox">
+      <a class="logo" href="#Galaxy_Genome_Wiki">GALAXY GENOME <span>WIKI</span></a>
+      <div class="brandRow">
+        <p class="unofficial">Unofficial fan wiki</p>
+        <a class="mapLink" id="mapLink" href="https://galaxy-genome.github.io/map/" target="_blank" rel="noopener">Map</a>
+      </div>
+      <input id="q" type="search" placeholder="Search articles" autocomplete="off">
+    </div>
+    <div id="navList"></div>
+  </nav>
   <main>
     <div class="hero">
       <h1 id="title">—</h1>
@@ -270,20 +277,20 @@ function sortable(){
 }
 
 const navEl = document.getElementById("nav");
+const listEl = document.getElementById("navList");
 function buildNav(){
-  // Said first, before any article: what this is and whose game it is about.
-  navEl.innerHTML = '<p class="unofficial">Unofficial fan wiki</p>';
+  listEl.innerHTML = "";
 
   for (const [group, items] of NAV){
-    const h = document.createElement("h3"); h.textContent = group; navEl.append(h);
+    const h = document.createElement("h3"); h.textContent = group; listEl.append(h);
     for (const t of items){
       const a = document.createElement("a");
       a.href = "#" + slug(t); a.textContent = t; a.dataset.t = t;
-      navEl.append(a);
+      listEl.append(a);
     }
   }
   // The same credit the map carries, in the same words.
-  navEl.insertAdjacentHTML("beforeend", `<footer class="credit">
+  listEl.insertAdjacentHTML("beforeend", `<footer class="credit">
     <p>Galaxy Genome is made by SKV Games.</p>
     <p class="stores"><span>Get the game</span>
       <a href="https://play.google.com/store/apps/details?id=com.skvgames.GalaxyGenome"
