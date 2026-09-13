@@ -26,6 +26,13 @@ a.new{color:#e06c6c}
 .topbar input{margin-left:auto;width:min(320px,40vw);padding:7px 11px;border-radius:16px;
   border:1px solid var(--edge);background:#0d1116;color:var(--ink);font:inherit;font-size:13px}
 .topbar input:focus{outline:none;border-color:var(--accent)}
+/* The link across to the map, drawn exactly as the map draws its link here. */
+.mapLink{flex:none;font-family:ui-monospace,Menlo,monospace;font-size:12px;
+  letter-spacing:.04em;color:var(--accent);border:1px solid var(--accent);
+  border-radius:2px;padding:2px 8px;white-space:nowrap}
+.mapLink::after{content:" \2197"}
+.mapLink:hover,.mapLink:focus-visible{text-decoration:none;color:var(--head);
+  border-color:var(--head);outline:none}
 
 .shell{display:grid;grid-template-columns:230px minmax(0,1fr);gap:0;
   max-width:1500px;margin:0 auto}
@@ -114,7 +121,7 @@ body.navopen .burger span::after{background:var(--accent)}
   main{padding:20px 16px 70px}
   .topbar input{width:auto;flex:1;min-width:90px}
   .topbar{gap:10px;padding:0 12px}
-  #devflag{display:none}
+
 }
 @media (prefers-reduced-motion:reduce){nav.side{transition:none}}
 </style></head><body>
@@ -123,8 +130,7 @@ body.navopen .burger span::after{background:var(--accent)}
   <button class="burger" id="burger" type="button" aria-label="Articles"
           aria-controls="nav" aria-expanded="false"><span></span></button>
   <a class="logo" href="#Galaxy_Genome_Wiki">GALAXY GENOME <span>WIKI</span></a>
-  <span id="devflag" hidden style="font:11px var(--mono);color:var(--accent2);
-  border:1px solid var(--accent2);border-radius:3px;padding:2px 7px">local map</span>
+  <a class="mapLink" id="mapLink" href="https://galaxy-genome.github.io/map/" target="_blank" rel="noopener">Map</a>
 <input id="q" type="search" placeholder="Search articles" autocomplete="off">
 </div>
 
@@ -152,7 +158,7 @@ const NAV = [["Guides", ["Getting started", "Exploration", "Mining", "Trading", 
 // Fandom. Served from localhost, the preview points at a local map instead.
 const MAP_PUB = "https://galaxy-genome.github.io/map/";
 const MAP_DEV = location.hostname === "localhost" || location.hostname === "127.0.0.1"
-  ? location.protocol + "//" + location.hostname + ":8777/" : null;
+  ? location.protocol + "//" + location.hostname + ":8791/" : null;
 const mapUrl = u => MAP_DEV && u.startsWith(MAP_PUB) ? MAP_DEV + u.slice(MAP_PUB.length) : u;
 const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 const slug = t => encodeURIComponent(t.replace(/ /g,"_"));
@@ -354,7 +360,7 @@ addEventListener("hashchange", route);
   navEl.addEventListener("click", e => { if (e.target.closest("a[data-t]")) setOpen(false); });
   addEventListener("keydown", e => { if (e.key === "Escape") setOpen(false); });
 }
-if (MAP_DEV) document.getElementById("devflag").hidden = false;
+document.getElementById("mapLink").href = mapUrl(MAP_PUB);
 buildNav();
 location.hash ? route() : show("Galaxy Genome Wiki");
 </script>
