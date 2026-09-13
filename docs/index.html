@@ -35,6 +35,15 @@ nav.side h3{margin:18px 18px 6px;font-family:var(--ui);font-size:11px;letter-spa
 nav.side a{display:block;padding:6px 18px;color:var(--ink);font-size:14px;
   border-left:3px solid transparent}
 nav.side a:hover{background:#1a2029;text-decoration:none}
+nav.side .credit{margin:24px 18px 0;padding-top:12px;border-top:1px solid var(--edge);
+  font-family:ui-monospace,Menlo,monospace;font-size:11px;line-height:1.6;color:var(--dim)}
+nav.side .credit p{margin:0 0 6px}
+nav.side .credit .stores{display:grid;grid-template-columns:auto 1fr;column-gap:8px;
+  row-gap:2px;align-items:baseline;justify-items:start}
+nav.side .credit .stores>span{grid-row:span 2}
+nav.side .credit a{display:inline;padding:0;border:0;font-size:inherit;color:var(--link)}
+nav.side .credit a:hover{background:none;text-decoration:underline}
+nav.side .credit .fine{margin-bottom:0;opacity:.8}
 nav.side a.on{border-left-color:var(--accent);background:#1a2029;color:var(--accent)}
 
 main{padding:26px 34px 90px;min-width:0}
@@ -232,6 +241,7 @@ function sortable(){
 const navEl = document.getElementById("nav");
 function buildNav(){
   navEl.innerHTML = "";
+
   for (const [group, items] of NAV){
     const h = document.createElement("h3"); h.textContent = group; navEl.append(h);
     for (const t of items){
@@ -240,6 +250,17 @@ function buildNav(){
       navEl.append(a);
     }
   }
+  // The same credit the map carries, in the same words.
+  navEl.insertAdjacentHTML("beforeend", `<footer class="credit">
+    <p>Galaxy Genome is made by SKV Games.</p>
+    <p class="stores"><span>Get the game</span>
+      <a href="https://play.google.com/store/apps/details?id=com.skvgames.GalaxyGenome"
+         target="_blank" rel="noopener noreferrer">Google Play</a>
+      <a href="https://apps.apple.com/us/app/galaxy-genome/id1566857517"
+         target="_blank" rel="noopener noreferrer">App Store</a></p>
+    <p class="fine">Not affiliated with or endorsed by the developer. All game data
+      belongs to SKV Games.</p>
+  </footer>`);
 }
 
 let current = null;
