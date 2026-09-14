@@ -26,5 +26,9 @@ map's data before it publishes.
 ## Licence
 
 The articles are CC BY-SA 4.0, matching Fandom, so text can move between the two
-freely. The game's data belongs to SKV Games and is used with the developer's
-permission.
+freely.
+
+The CC BY-SA 4.0 licence covers the wiki's prose and the arrangement of the
+articles. The ship and module artwork, and any text taken from the game, belong to
+SKV Games and are included with their permission. That permission does not extend
+to reuse beyond this wiki.
