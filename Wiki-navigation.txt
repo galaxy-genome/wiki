@@ -9,8 +9,8 @@
 *Your ship
 **Ships|Ships
 **Modules|Modules
+**Module Mods|Module Mods
 **Navigation|Navigation
-**Crafting|Crafting
 **Reputation and ranks|Reputation and ranks
 **Galaxy Genome Map|Galaxy Genome Map
 *The galaxy
