@@ -1,11 +1,11 @@
 *Guides
 **Getting started|Getting started
+**Game Interface|Game Interface
 **Exploration|Exploration
 **Mining|Mining
 **Trading|Trading
 **Missions|Missions
 **Combat|Combat
-**Events and Tasks|Events and Tasks
 *Your ship
 **Ships|Ships
 **Modules|Modules
@@ -20,6 +20,7 @@
 **Factions|Factions
 **Achievements|Achievements
 *Extras
+**Events and Tasks|Events and Tasks
 **Spoilers|Spoilers
 **Side quests|Side quests
 **Modding|Modding
