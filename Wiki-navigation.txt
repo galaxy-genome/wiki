@@ -22,5 +22,6 @@
 *Extras
 **Events and Tasks|Events and Tasks
 **Spoilers|Spoilers
+**Game Story|Game Story
 **Side quests|Side quests
 **Modding|Modding
