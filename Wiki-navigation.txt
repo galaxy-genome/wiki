@@ -10,6 +10,7 @@
 **Ships|Ships
 **Modules|Modules
 **Module Mods|Module Mods
+**Ship stats|Ship stats
 **Navigation|Navigation
 **Reputation and ranks|Reputation and ranks
 **Galaxy Genome Map|Galaxy Genome Map
