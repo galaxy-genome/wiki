@@ -25,3 +25,5 @@
 **Game Story|Game Story
 **Side quests|Side quests
 **Modding|Modding
+**Your first quest by hand|Your first quest by hand
+**Your first star system by hand|Your first star system by hand
