@@ -683,13 +683,21 @@ function runSearch(){
 q.addEventListener("input", runSearch);
 qClear.addEventListener("click", () => { q.value = ""; runSearch(); q.focus(); });
 
+// A section may arrive encoded (%23 for "#") or decoded (a second "#"), and
+// images above it load after the first scroll, so it is found by its heading
+// text and scrolled to again once the page has loaded.
 function route(){
-  const [page, sec] = location.hash.slice(1).split("#");
+  const [page, ...rest] = location.hash.slice(1).split("#");
   show(unslug(page));
-  if (sec){
-    const el = document.getElementById(sec);
-    if (el) el.scrollIntoView({block: "start"});
-  }
+  let sec = rest.join("#").replace(/^#+(?=#)/, "");
+  if (!sec) return;
+  try { sec = decodeURIComponent(sec); } catch {}
+  const want = sec.replace(/_/g, " ").trim().toLowerCase();
+  const el = [...document.querySelectorAll("#body h2, #body h3, #body h4")]
+    .find(h => h.textContent.trim().toLowerCase() === want);
+  if (!el) return;
+  el.scrollIntoView({block: "start"});
+  if (document.readyState !== "complete") addEventListener("load", () => el.scrollIntoView({block: "start"}), {once: true});
 }
 addEventListener("hashchange", route);
 
