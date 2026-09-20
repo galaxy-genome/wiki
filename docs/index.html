@@ -590,9 +590,13 @@ document.getElementById("btnCopy").onclick = async () => {
   b.textContent = "Copied"; setTimeout(() => b.textContent = t, 1200);
 };
 
-// Search works as the mod editor's help search does: every word typed must appear
-// somewhere in an article, and matches rank by title, then a section heading, then
-// the text. A text match shows the passage it came from and opens at its section.
+/* The wiki's search, shared by the wiki page and the Discord bot so both answer identically.
+
+Every word typed must appear somewhere in an article; matches rank by title, then a section
+heading, then the text. A text match shows the passage it came from and opens at its section.
+
+`fmt` renders a snippet: `mark` wraps a matched word, `esc` escapes everything else. */
+function wikiSearch(ARTICLES, fmt) {
 const plainCache = new Map();
 function plainSections(title){
   if (plainCache.has(title)) return plainCache.get(title);
@@ -662,9 +666,16 @@ function snippetFor(text, at, words){
   const raw = text.slice(start, end).replace(/\s+/g, " ");
   const re = new RegExp(`(${words.map(escRe).join("|")})`, "gi");
   return (start > 0 ? "… " : "") +
-    raw.split(re).map(p => words.includes(p.toLowerCase()) ? `<mark>${esc(p)}</mark>` : esc(p)).join("") +
+    raw.split(re).map(p => words.includes(p.toLowerCase()) ? fmt.mark(p) : fmt.esc(p)).join("") +
     (end < text.length ? " …" : "");
 }
+  return { searchArticles, plainSections };
+}
+
+if (typeof module !== 'undefined') module.exports = { wikiSearch };
+
+const { searchArticles } = wikiSearch(ARTICLES, { mark: p => `<mark>${esc(p)}</mark>`, esc });
+
 
 const q = document.getElementById("q");
 const resultsEl = document.getElementById("results");
